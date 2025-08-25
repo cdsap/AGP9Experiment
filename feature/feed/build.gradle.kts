@@ -21,13 +21,13 @@ dependencies {
     implementation(libs.work.runtime.ktx)
     implementation(libs.hilt.work)
     implementation(libs.hilt.android)
-    
+
     ksp(libs.hilt.compiler.androidx)
     ksp(libs.hilt.compiler)
     kspTest(libs.hilt.compiler)
     kspAndroidTest(libs.hilt.compiler)
     testImplementation(libs.hilt.android.testing)
-    
+
     implementation(platform(libs.compose.bom))
     implementation(libs.compose.ui)
     implementation(libs.compose.ui.graphics)
@@ -39,7 +39,7 @@ dependencies {
     implementation(libs.lifecycle.viewmodel.compose)
     debugImplementation(libs.compose.ui.tooling)
     debugImplementation(libs.compose.ui.test.manifest)
-    
+
     testImplementation(libs.junit4)
     testImplementation(libs.junit5.vintage)
     testImplementation(libs.coroutines.test)
@@ -52,6 +52,6 @@ dependencies {
     testImplementation(libs.robolectric)
     testImplementation(libs.androidx.test.junit)
     androidTestImplementation(libs.espresso.core)
-    
+
 
 }
