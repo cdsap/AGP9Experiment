@@ -4,7 +4,7 @@ set -euo pipefail
 # === Config ===
 FILE="build-logic/convention/src/main/kotlin/com/logic/CompositeBuildPluginAndroidLib.kt"
 CLASS_NAME="CompositeBuildPluginAndroidLib"
-ITERATIONS=6   # change if you want more/less cycles
+ITERATIONS=20   # change if you want more/less cycles
 
 # === Helpers ===
 
@@ -55,6 +55,7 @@ EOF
   {
     head -n $((close_line-1)) "$FILE"
     printf "%s" "$FUNC"
+    printf "%s\n" ""
     tail -n +"$close_line" "$FILE"
   } > "$tmpfile"
 
@@ -63,20 +64,21 @@ EOF
 }
 
 run_build() {
+  local tag="$1"
   echo ">>> $(date -u +%FT%TZ) Running assembleDebug"
-  ./gradlew --no-daemon assembleDebug
+  ./gradlew  assembleDebug -Dscan.tag.$tag
 }
 
 # === Main ===
 check_file
-
+run_build seed
 for ((i=1; i<=ITERATIONS; i++)); do
   echo "===== CYCLE $i ====="
-  run_build
+  run_build gradle_9
   echo ">>> Performing change: add new private function inside $CLASS_NAME"
   add_private_function "$i"
 done
 
 echo "===== FINAL BUILD ====="
-run_build
+#run_build
 echo "Done."
