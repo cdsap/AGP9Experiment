@@ -2,8 +2,8 @@
 set -euo pipefail
 
 # === Config ===
-FILE="build-logic/convention/src/main/kotlin/com/logic/CompositeBuildPluginAndroidLib.kt"
-CLASS_NAME="CompositeBuildPluginAndroidLib"
+FILE="build-logic/convention/src/main/kotlin/com/logic/AuxClass.kt"
+CLASS_NAME="AuxClass"
 ITERATIONS=20   # change if you want more/less cycles
 
 # === Helpers ===
@@ -72,11 +72,13 @@ run_build() {
 # === Main ===
 check_file
 run_build seed
+run_build seed2
 for ((i=1; i<=ITERATIONS; i++)); do
   echo "===== CYCLE $i ====="
-  run_build gradle_8_14
   echo ">>> Performing change: add new private function inside $CLASS_NAME"
   add_private_function "$i"
+  run_build gradle_8_14_build_exp
+
 done
 
 echo "===== FINAL BUILD ====="

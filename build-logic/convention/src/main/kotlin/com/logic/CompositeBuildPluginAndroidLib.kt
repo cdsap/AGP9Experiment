@@ -48,6 +48,8 @@ class CompositeBuildPluginAndroidLib : Plugin<Project> {
                 toolchain.languageVersion.set(org.gradle.jvm.toolchain.JavaLanguageVersion.of(23))
             }
 
+            val auxClass = AuxClass()
+            auxClass.alo()
             dependencies {
 
             }
