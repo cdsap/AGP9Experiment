@@ -4,7 +4,7 @@ set -euo pipefail
 # === Config ===
 FILE="build-logic/convention/src/main/kotlin/com/logic/AuxClass.kt"
 CLASS_NAME="AuxClass"
-ITERATIONS=20   # change if you want more/less cycles
+ITERATIONS=10   # change if you want more/less cycles
 
 # === Helpers ===
 
