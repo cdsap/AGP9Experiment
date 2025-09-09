@@ -66,7 +66,7 @@ EOF
 run_build() {
   local tag="$1"
   echo ">>> $(date -u +%FT%TZ) Running assembleDebug"
-  ./gradlew  assembleDebug -Dscan.tag.$tag
+  ./gradlew  assembleDebug -Dscan.tag.$tag --info
 }
 
 # === Main ===
@@ -77,7 +77,7 @@ for ((i=1; i<=ITERATIONS; i++)); do
   echo "===== CYCLE $i ====="
   echo ">>> Performing change: add new private function inside $CLASS_NAME"
   add_private_function "$i"
-  run_build gradle_9_build_exp
+  run_build gradle_9_build_exp_info
 
 done
 
