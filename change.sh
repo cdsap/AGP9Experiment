@@ -77,7 +77,7 @@ for ((i=1; i<=ITERATIONS; i++)); do
   echo "===== CYCLE $i ====="
   echo ">>> Performing change: add new private function inside $CLASS_NAME"
   add_private_function "$i"
-  run_build gradle_9_build_exp_root_plugin
+  run_build gradle_9_build_exp_root_plugin_2
 
 done
 
