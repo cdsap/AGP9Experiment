@@ -5,6 +5,7 @@ import org.gradle.api.JavaVersion
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.configure
 import org.gradle.kotlin.dsl.dependencies
+import org.gradle.kotlin.dsl.register
 import org.gradle.kotlin.dsl.withType
 import org.jetbrains.kotlin.gradle.dsl.KotlinAndroidProjectExtension
 
@@ -19,8 +20,10 @@ class CompositeBuildPluginAndroidLib : Plugin<Project> {
                 apply("org.jetbrains.kotlin.plugin.compose")
             }
 
-            extensions.configure<com.android.build.gradle.LibraryExtension>  {
-                namespace = "com.awesome." + target.name.replace(":","_").replace("-", "")
+            tasks.register<AwesomeTask>("awesomeTask")
+
+            extensions.configure<com.android.build.gradle.LibraryExtension> {
+                namespace = "com.awesome." + target.name.replace(":", "_").replace("-", "")
                 compileSdk = 35
                 defaultConfig {
                     minSdk = 24
@@ -29,7 +32,10 @@ class CompositeBuildPluginAndroidLib : Plugin<Project> {
                 buildTypes {
                     getByName("release") {
                         isMinifyEnabled = false
-                        proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+                        proguardFiles(
+                            getDefaultProguardFile("proguard-android-optimize.txt"),
+                            "proguard-rules.pro"
+                        )
                     }
                 }
                 compileOptions {
@@ -41,12 +47,13 @@ class CompositeBuildPluginAndroidLib : Plugin<Project> {
                 }
             }
             target.extensions.getByType(KotlinAndroidProjectExtension::class.java).apply {
-                    jvmToolchain(23)
+                jvmToolchain(23)
             }
 
-            target.extensions.getByType(org.gradle.api.plugins.JavaPluginExtension::class.java).apply {
-                toolchain.languageVersion.set(org.gradle.jvm.toolchain.JavaLanguageVersion.of(23))
-            }
+            target.extensions.getByType(org.gradle.api.plugins.JavaPluginExtension::class.java)
+                .apply {
+                    toolchain.languageVersion.set(org.gradle.jvm.toolchain.JavaLanguageVersion.of(23))
+                }
 
             dependencies {
 
