@@ -7,10 +7,10 @@ dependencies {
     implementation(libs.kotlin.plugin)
     implementation(libs.kotlin.compose.plugin)
 
-    
+
                 implementation(libs.android.gradle.plugin)
                 implementation(libs.hilt.plugin)
-            
+
 }
 
 
@@ -27,6 +27,14 @@ gradlePlugin {
         register("androidAppPlugin") {
             id = "awesome.androidapp.plugin"
             implementationClass = "com.logic.CompositeBuildPluginAndroidApp"
+        }
+    }
+}
+gradlePlugin {
+    plugins {
+        register("rootPlugin") {
+            id = "awesome.root.plugin"
+            implementationClass = "com.logic.RootProject"
         }
     }
 }
