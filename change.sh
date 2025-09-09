@@ -55,7 +55,7 @@ run_build seed2
 for ((i=1; i<=ITERATIONS; i++)); do
   echo "===== CYCLE $i ====="
   update_do_some_work "$i"
-  run_build gradle_9_build_exp_task_plugin
+  run_build gradle_9_build_exp_task_plugin_2
 done
 
 echo "===== FINAL BUILD ====="
