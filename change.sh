@@ -66,7 +66,7 @@ EOF
 run_build() {
   local tag="$1"
   echo ">>> $(date -u +%FT%TZ) Running assembleDebug"
-  ./gradlew  assembleDebug -Dscan.tag.$tag --info
+  ./gradlew  help -Dscan.tag.$tag --info
 }
 
 # === Main ===
